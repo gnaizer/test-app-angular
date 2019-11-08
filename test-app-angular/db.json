@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Nazar",
+      "description": "player",
+      "createdAt": "",
+      "editedAt": ""
+    }
+  ],
+  "profile": {
+    "name": "",
+    "password": ""
+  }
+}

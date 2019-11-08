@@ -1,4 +1,7 @@
+import { ItemsService } from './core/services/items.service';
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Items } from './core/models/items';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'test-app-angular';
+  public itemsList: Items[] = [];
+
+  constructor(private http: HttpClient) {
+    this.getItemsData();
+  }
+
+  public getItemsData() {
+    this.http.get('http://localhost:3004/items')
+      .subscribe(res => {
+        this.itemsList.push(...res as Array<Items>);
+        console.log(this.itemsList);
+      });
+  }
+
 }
