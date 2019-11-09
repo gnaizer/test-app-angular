@@ -1,3 +1,4 @@
+import { MaterialModule } from './core/modules/material.module';
 import { ItemsService } from './core/services/items.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -13,7 +14,8 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MaterialModule
   ],
   providers: [ItemsService],
   bootstrap: [AppComponent]

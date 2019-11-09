@@ -22,5 +22,19 @@ export class AppComponent {
         console.log(this.itemsList);
       });
   }
+    // "users": {
+  //   "id": 1,
+  //   "name": "nazar",
+  //   "email": "naizer@gmail.com",
+  //   "password": "nazar"
+  // }
+  // {
+  //   "id": 1,
+  //   "name": "Nazar",
+  //   "cost": 1,
+  //   "description": "player",
+  //   "createdAt": "",
+  //   "editedAt": ""
+  // }
 
 }
