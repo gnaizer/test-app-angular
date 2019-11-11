@@ -22,7 +22,6 @@ export class ProductsComponent {
     this.http.get('http://localhost:3004/items')
       .subscribe(res => {
         this.itemsList.push(...(res as Array<Items>));
-        console.log(this.itemsList);
         this.dataSource = new MatTableDataSource(this.itemsList);
       });
   }
