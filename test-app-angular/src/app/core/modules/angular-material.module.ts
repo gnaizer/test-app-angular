@@ -1,3 +1,4 @@
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { NgModule } from '@angular/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -21,7 +22,8 @@ import { MatTabsModule } from '@angular/material/tabs';
         MatIconModule,
         MatDividerModule,
         MatTooltipModule,
-        MatCardModule
+        MatCardModule,
+        MatDialogModule
     ]
 })
 export class AngularMaterialModule { }

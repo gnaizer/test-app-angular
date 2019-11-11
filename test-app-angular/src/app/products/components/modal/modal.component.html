@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Fill this form to create new Item!</h1>
+<div mat-dialog-content>
+  <div [formGroup]="form">
+    <mat-form-field>
+      <input matInput autocomplete="off" matInput formControlName="name" type="text" placeholder="Name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput autocomplete="off" matInput formControlName="description" type="text" placeholder="Description">
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button *ngIf="!data.id" (click)="onSaveClick()" [disabled]="!form.valid" cdkFocusInitial>Create</button>
+  <button mat-button *ngIf="data.id"(click)="onSaveClick()" [disabled]="!form.valid" cdkFocusInitial>Edit</button>
+</div>
