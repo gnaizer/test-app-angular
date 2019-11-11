@@ -9,18 +9,7 @@ import { Items } from './core/models/items';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  public itemsList: Items[] = [];
 
-  constructor(private http: HttpClient) {
-    this.getItemsData();
-  }
-
-  public getItemsData() {
-    this.http.get('http://localhost:3004/items')
-      .subscribe(res => {
-        this.itemsList.push(...res as Array<Items>);
-        console.log(this.itemsList);
-      });
-  }
+  constructor() { }
 
 }
