@@ -22,13 +22,14 @@ export class ModalComponent implements OnInit {
 
   public onSaveClick(): void {
     this.dialogRef.close(this.form.value);
+    console.log(this.form.value)
   }
   ngOnInit() {
     this.form = new FormGroup({
       id: new FormControl(this.data ? this.data.id : null),
       name: new FormControl(this.data ? this.data.name : '', Validators.required),
       description: new FormControl(this.data ? this.data.description : '', Validators.required),
-      createdAt: new FormControl(this.data ? this.data.createdAt : ''),
+      createdAt: new FormControl(this.data ? this.data.createdAt : new Date()),
       editedAt: new FormControl(this.data ? this.data.editedAt : '')
     });
   }
