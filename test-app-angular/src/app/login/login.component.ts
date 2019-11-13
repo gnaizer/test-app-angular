@@ -1,6 +1,8 @@
+import { LoginService } from './../core/services/login.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -8,16 +10,38 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  public form: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-  });
-  constructor(public router: Router) { }
+  public form: FormGroup;
+  public loading = false;
+  public submitted = false;
+  public returnUrl = 'products';
 
-  ngOnInit() { }
+  constructor(public router: Router,
+    private route: ActivatedRoute,
+    private loginService: LoginService) { }
 
-  public onLoggedin() {
-    localStorage.setItem('isLoggedin', 'true');
-}
+  ngOnInit() {
+    this.form = new FormGroup({
+      username: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+    });
+
+    this.loginService.logout();
+  }
+
+  get f() { return this.form.controls; }
+
+  onSubmit() {
+    this.submitted = true;
+    if (this.form.invalid) {
+      return;
+    }
+
+    this.loading = true;
+    this.loginService.login(this.f.username.value, this.f.password.value)
+      .pipe(first())
+      .subscribe(data => {
+        this.router.navigate([this.returnUrl]);
+      });
+  }
 
 }

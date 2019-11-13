@@ -1,3 +1,4 @@
+import { AuthGuard } from './core/guard/auth.guard';
 import { ConfirmModalModule } from './core/components/confirm-modal/confirm-modal.module';
 import { ModalComponent } from './products/components/modal/modal.component';
 import { ModalModule } from './products/components/modal/modal.module';
@@ -26,6 +27,9 @@ import { ConfirmModalComponent } from './core/components/confirm-modal/confirm-m
   ],
   bootstrap: [
     AppComponent
+  ],
+  providers: [
+    AuthGuard
   ],
   entryComponents: [
     ModalComponent,

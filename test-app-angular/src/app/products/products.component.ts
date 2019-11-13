@@ -2,11 +2,9 @@ import { ItemsService } from './../core/services/items.service';
 import { ModalComponent } from './components/modal/modal.component';
 import { Component } from '@angular/core';
 import { Item } from '../core/models/items';
-import { HttpClient } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmModalComponent } from '../core/components/confirm-modal/confirm-modal.component';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -23,21 +21,6 @@ export class ProductsComponent {
     this.getAllItems();
   }
 
-  public openDialog(item: Item): void {
-    const dialogRef = this.dialog.open(ModalComponent, {
-      width: '400px',
-      data: item
-    });
-
-    dialogRef.afterClosed().subscribe((result: Item) => {
-      if (result && result.id) {
-        this.itemsService.updateItem(result.id, result).subscribe();
-      } else {
-        this.itemsService.createItem(result).subscribe();
-      }
-    });
-  }
-
   public getAllItems() {
     this.itemsService.getItems().subscribe(result => {
       this.itemsList = result as Item[];
@@ -45,14 +28,37 @@ export class ProductsComponent {
     });
   }
 
+  public openDialog(item: Item): void {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      width: '400px',
+      data: item
+    });
+
+    dialogRef.afterClosed().subscribe((result: Item) => {
+      if (result === null) {
+        return;
+      } else if (result && result.id) {
+        this.itemsService.updateItem(result.id, result).subscribe(data => {
+          this.getAllItems();
+        });
+      } else {
+        this.itemsService.createItem(result).subscribe(data => {
+          this.getAllItems();
+        });
+      }
+    });
+  }
+
   public openConfirmDialog(element: Item): void {
     const dialogRef = this.dialog.open(ConfirmModalComponent, {
       width: '400px',
-      data: element.id
+      data: element
     });
     dialogRef.afterClosed().subscribe(id => {
       if (id) {
-        this.itemsService.deleteItem(id).subscribe();
+        this.itemsService.deleteItem(id).subscribe(data => {
+          this.getAllItems();
+        });
       }
     });
     this.getAllItems();

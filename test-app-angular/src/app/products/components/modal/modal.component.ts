@@ -12,25 +12,22 @@ export class ModalComponent implements OnInit {
   public form: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<ModalComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Item) {
-                console.log(data);
-              }
+              @Inject(MAT_DIALOG_DATA) public data: Item) { }
 
   public onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(null);
   }
 
   public onSaveClick(): void {
     this.dialogRef.close(this.form.value);
-    console.log(this.form.value)
   }
   ngOnInit() {
     this.form = new FormGroup({
       id: new FormControl(this.data ? this.data.id : null),
       name: new FormControl(this.data ? this.data.name : '', Validators.required),
       description: new FormControl(this.data ? this.data.description : '', Validators.required),
-      createdAt: new FormControl(this.data ? this.data.createdAt : new Date()),
-      editedAt: new FormControl(this.data ? this.data.editedAt : '')
+      createdAt: new FormControl(this.data && this.data.id ? this.data.createdAt : new Date()),
+      editedAt: new FormControl(this.data && this.data.createdAt ? new Date() : '')
     });
   }
 

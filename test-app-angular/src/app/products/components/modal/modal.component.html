@@ -11,6 +11,6 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button *ngIf="!data.id" (click)="onSaveClick()" [disabled]="!form.valid" cdkFocusInitial>Create</button>
-  <button mat-button *ngIf="data.id"(click)="onSaveClick()" [disabled]="!form.valid" cdkFocusInitial>Edit</button>
+  <button mat-raised-button color="primary" *ngIf="!data.id" (click)="onSaveClick()" [disabled]="!form.valid" cdkFocusInitial>Create</button>
+  <button mat-raised-button color="primary" *ngIf="data.id"(click)="onSaveClick()" [disabled]="!form.valid" cdkFocusInitial>Edit</button>
 </div>

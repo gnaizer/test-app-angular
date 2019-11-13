@@ -1,3 +1,4 @@
+import { HeaderComponent } from './components/header/header.component';
 import { ItemsService } from './../core/services/items.service';
 import { AngularMaterialModule } from './../core/modules/angular-material.module';
 import { NgModule } from '@angular/core';
@@ -26,7 +27,8 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [
-    ProductsComponent
+    ProductsComponent,
+    HeaderComponent
   ],
   exports: [
     ProductsComponent
